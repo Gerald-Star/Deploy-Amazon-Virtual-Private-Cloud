@@ -1,37 +1,32 @@
 
-# Architecture Design
-
-## Part 1 with Architecture Design
-![Amazon Virtual Private Cloud](/image/VPC%20Architecture%20Design.png)
-
-https://github.com/Gerald-Star/Deploy-Amazon-Virtual-Private-Cloud/assets/62772506/f6533f82-1448-4bc9-ac5b-f6159f809265
-
-
-[Amazon Virtual Private Cloud](https://explore.skillbuilder.aws/learn/course/499/play/41264/configuring-and-deploying-amazon-vpc-with-multiple-subnets) Cloud (Amazon VPC) allows you to provision a logically isolated section of the AWS cloud. This section enables you to launch AWS resources in a virtual network that you define. With Amazon VPC, you have full control over your virtual networking environment. You can select your IP address range, create subnets, and configure route tables and network gateways. 
+# Architecture Design of Amazon Virtual Private Cloud (VPC)
 
 ## Use Cases
 
 * To launch a simple website or blog
 * To host multi-tier web applications.
 * To use and create hybrid connections.
+  
+## Part 1 with Architecture Design
+![Amazon Virtual Private Cloud](/image/VPC%20Architecture%20Design.png)
+
+## Part 2 Description of the Amazon VPC System Design
+
+https://github.com/Gerald-Star/Deploy-Amazon-Virtual-Private-Cloud/assets/62772506/f6533f82-1448-4bc9-ac5b-f6159f809265
+
+[Amazon Virtual Private Cloud](https://explore.skillbuilder.aws/learn/course/499/play/41264/configuring-and-deploying-amazon-vpc-with-multiple-subnets) Cloud (Amazon VPC) allows you to provision a logically isolated section of the AWS cloud. This section enables you to launch AWS resources in a virtual network that you define. With Amazon VPC, you have full control over your virtual networking environment. You can select your IP address range, create subnets, and configure route tables and network gateways. 
+
+You can use both IPv4 and IPv6 in your VPC to ensure secure and easy access to resources and applications. Create a VPC that consists of three subnets; one public and two private subnets. 
+The web server is hosted in the public subnet to enable it to reach the public internet. 
+
+The MySQL RDS instance (database) is hosted on private subnets. To use a DB instance, such as MySQL RDS, in a VPC, the VPC must have at least two subnets located in two different availability zones within the AWS region where you intend to deploy your DB instance.  As the user in the image, you have tested the application running in the new VPC. 
+
+The diagram provided shows certain general items that you have created. There are other VPC items not displayed, such as route tables and security groups. 
 
 ## Part 2. Configuration of Amazon Virtual Private Cloud on Amazon Management Console
 https://github.com/Gerald-Star/Deploy-Amazon-Virtual-Private-Cloud/assets/62772506/f0cb5b8d-b1ca-480b-9bc5-e48ecfb9cd2e
 
-
-
  Read more blogs about [Amazon Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
-
-You can use both IPv4 and IPv6 in your VPC to ensure secure and easy access to resources and applications.
-
-Created a VPC that consists of three subnets; one public and two private subnets. The web server is hosted in the public subnet to enable it to reach the public internet.
-
-On the other hand, the MySQL RDS instance (database) is hosted on private subnets. To use a DB instance, such as MySQL RDS, in a VPC, the VPC must have at least two subnets located in two different availability zones within the AWS region where you intend to deploy your DB instance. 
-
-As the user in the image, you have tested the application running in the new VPC. 
-
-The diagram provided shows certain general items that you have created. There are other VPC items not displayed, such as route tables and security groups. 
-
 
 ## Task 1. Create an Amazon Virtual Private Cloud (VPC)
 
@@ -43,15 +38,6 @@ The diagram provided shows certain general items that you have created. There ar
 * Deploy a web server and a MySQL RDS instance
 * Configure your application to connect to your MySQL RDS instance
 
-
-## Task 2: To create Amazon Virtual Private Cloud (VPC)
-
-* Step 1. On the Amazon Management console service, search VPC and select it
-* Step 2. Choose Your VPCs from the left navigational side
-* Step 3. Choose Create VPC and then configure
-* Step 4. You are on the VPC dashboard; select VPC Only. 
-* Step 5. On the Name Tag: Write a name of your choice; My first VPC
-* Step 6. Write the IPv4 CIDR block: 10.0.0.0/16
 
 ### What is IPv4?
 
@@ -112,7 +98,7 @@ The Internet gateway has two primary functions, one is to provide a target to di
 *Even though you created an Internet gateway and attached it to your VPC, you still have to tell instances within your public subnet how to get to the Internet.*
 
 
-## Task 5: Create a Route Table, Add Routes, And Associate Public Subnets
+## Task 5: Create a Route Table, Add Routes And Associate Public Subnets
 
 Create a route table for internet-bound traffic
 Add a route to the route table to direct the internet-bound traffic to the internet gateway
@@ -130,20 +116,20 @@ This route can be set to all destinations not explicitly defined in the route ta
 
 Currently, there is only one default route table associated with the VPC, My VPC. This table routes traffic internally. To route public traffic to your Internet Gateway, you need to create an additional Route Table.
 
-* Step 2. Cleck create route table
-* Step 3: Configure the following under Route table setting section.
+* Step 2. Click Create Route table
+* Step 3: Configure the following under the Route table setting section.
 
 *Give the Route Table a name: Name-optional: My Public Route Table*
 
 *Select the VPC you created: VPC: My first VPC*
 
-* Step 4. Click Create Route table
+* Step 4. Click Create a Route table
 *On the Route, there is one route in your route table that allows traffic within the 10.0.0.0/16 network to flow, but it does not route traffic outside of the network.* 
 
 **Add a new route to enable public traffic.**
 
 * Step 5. Click Edit routes
-* Step 6. Click Add routes to configure
+* Step 6. Click Add Routes to configure
 * Destination: 0.0.0.0/0
 * Target: Select Internet Gateway in the drop-down and then select the displayed Internet Gateway ID.
 * Step 7. Click Save changes
@@ -158,14 +144,14 @@ Currently, there is only one default route table associated with the VPC, My VPC
 
 To allow users to access your web server via HTTP, you need to add a security group. A security group is like a virtual firewall that controls incoming and outgoing traffic for your instance. 
 
-When you create an instance in a VPC, you can assign up to five security groups to it. 
+When you create an instance in a VPC, you can assign up to five security groups. 
 
 Remember that security groups are assigned at the instance level, not the subnet level. This means that each instance in a subnet in your VPC can be assigned to a different set of security groups.
 
  If you don't specify a particular group during the instance launch, the instance is automatically assigned to the default security group for the VPC.
 
 * Step 1. Choose Security group in the left navigation pane
-* Step 2. Click Create Security group to configure
+* Step 2. Click Create Security Group to configure
 * Step 3. Write a Security group name of your choice: Web Server SG
 * Step 4. Description: My web server security group
 * Step 5. Select the VPC you created
@@ -178,11 +164,11 @@ Click Ass rule
 
 ## Task 7: Launch a Web Server in your Public Subnet.
 
-In this task, you launch a web server that runs an address book application. Later in the lab, you connect the address book application to a Amazon RDS for MySQL instance.
+In this task, you launch a web server that runs an address book application. Later in the lab, you connect the address book application to an Amazon RDS for MySQL instance.
 
 **In the AWS Management Console search field, type 
 EC2
-Select EC2 from the drop down menu.**
+Select EC2 from the drop-down menu.**
 
 * Step 1. Click Launch instances > Launch instances.
 
@@ -200,7 +186,7 @@ Note - Public 1 populates under the subnet section
 
 * Step 5. On the Firewall (security groups), choose  Select an existing security group
 Common security groups, *
-* Step 6. choose Web server
+* Step 6. Choose Web server
 * Step 7. Expand  Advanced Details (at the bottom of the page)
 *Copy this script into the User data text box:*
 
@@ -225,12 +211,12 @@ Wait for your web server to fully launch. It should display the following:
 Instance State:  running
 Status check: 2/2 checks passed.
 
-You can choose the refresh  icon to refresh your instances status.
+You can choose the refresh  icon to refresh your instance status.
 Your instance should be selected  if not, select it.
 Copy the Public IPv4 address address of the instance to your clipboard.
 Open a new web browser tab and paste the IP address into the browser.
 
-**Press Enter to go the web page.**
+**Press Enter to go to the web page.**
 An application should appear:
 
  Congratulations! You should be able to see this page. Currently, you do not have a database. Once you create your RDS instance, you connect it to your web server.
@@ -242,7 +228,7 @@ To deploy your RDS database, your VPC must have at least two subnets. These subn
 
 * Step 1. In the AWS Management Console search field, type 
 VPC
-*Select VPC from the drop down menu*
+*Select VPC from the drop-down menu*
 
 * Step 2. In the left navigation pane, choose Subnets.
 * Step 3 Choose Create subnet then configure:
@@ -250,7 +236,7 @@ VPC: My VPC
 *Step 4. Subnet name: Private 1
 * Step 5. Availability Zone: Select the first AZ in the list
 * Step 6. IPv4 CIDR block: 10.0.2.0/24
-**Choose Create subnet**
+**Choose to Create subnet**
 
 ### CREATE YOUR SECOND PRIVATE SUBNET
 
@@ -260,7 +246,7 @@ VPC: My VPC
 * Step 4. Availability Zone: Select the second AZ in the list
 IPv4 CIDR block: 10.0.3.0/24
 
-Choose Create subnet
+Choose to Create subnet
 Task 8: Create a Security Group for your Database Server
 
 Now that your private subnets are configured, you secure the types of traffic that can access your MySQL database. In this task, you create a security group to only allow MySQL traffic from your Web server.
@@ -279,7 +265,7 @@ Source:
 Custom
 Paste the web server security group ID that you copied to your text editor.
 
-At the bottom of the screen,choose Create security group.
+At the bottom of the screen, choose Create Security Group.
 
 This allows your web server to communicate with the database.
 
@@ -293,7 +279,7 @@ Amazon RDS instances require a database subnet group. In this task, you create a
 
 In the AWS Management Console search field, type RDS:
 
-Select RDS from the drop down menu.
+Select RDS from the drop-down menu.
 
 In the left navigation pane, choose Subnet groups.
 Choose Create DB Subnet Group then configure:
@@ -317,7 +303,7 @@ Choose Create database then configure:
 
 Engine options: MySQL
 Version: MySQL 5.7.X
- It is very important to select latest version of 5.7.X. Select the version with highest number. This lab requires it for the application.
+ It is very important to select the latest version of 5.7.X. Select the version with the highest number. This lab requires it for the application.
 
 In the Templates section, select Dev/Test.
 
@@ -344,11 +330,11 @@ Add the Database security group
 Remove the default security group
 In the Monitoring section, de-select  Enable Enhanced monitoring.
 
-In the Additional configuration section (located near the bottom), choose  Additional configuration, then configure:
+In the Additional Configuration section (located near the bottom), choose  Additional Configuration, then configure:
 Initial database name: myDB
-De-select  Enable automated backups This turn off backups, which launches the database a little bit quicker for your lab.
+De-select  Enable automated backups This turns off backups, which launches the database a little bit quicker for your lab.
 De-select  Enable auto minor version upgrade
-At the bottom of the screen,choose Create database.
+At the bottom of the screen, choose Create Database.
 
 Choose refresh  every 60 seconds until the instance has a status of  available.
  Congratulations! You have deployed a MySQL database.
@@ -361,7 +347,7 @@ Before you can connect your address book application to your database, you need 
 
 Choose your mydb instance.
 In the Connectivity & security section, copy the Endpoint to your clipboard.
-You RDS endpoint should look similar to:
+Your RDS endpoint should look similar to:
 mydb.ciljcs3yv1rb.us-west-2.rds.amazonaws.com
 
 ### CONNECT TO YOUR DATABASE
