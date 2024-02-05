@@ -1,7 +1,7 @@
 
 # Architecture Design
 
-![Amazon Virtual Private Cloud](/images/VPC%20Architecture%20Design.png)
+![Amazon Virtual Private Cloud](/image/VPC%20Architecture%20Design.png)
 
 [Amazon Virtual Private Cloud](https://explore.skillbuilder.aws/learn/course/499/play/41264/configuring-and-deploying-amazon-vpc-with-multiple-subnets) Cloud (Amazon VPC) allows you to provision a logically isolated section of the AWS cloud. This section enables you to launch AWS resources in a virtual network that you define. With Amazon VPC, you have full control over your virtual networking environment. You can select your IP address range, create subnets, and configure route tables and network gateways. 
 
@@ -149,7 +149,6 @@ Currently, there is only one default route table associated with the VPC, My VPC
 
 **The subnet is now publicly accessible through the Internet Gateway**.
 
-
 ## Task 6: Create a Security Group for your Web Server.
 
 To allow users to access your web server via HTTP, you need to add a security group. A security group is like a virtual firewall that controls incoming and outgoing traffic for your instance. 
@@ -227,7 +226,6 @@ Copy the Public IPv4 address address of the instance to your clipboard.
 Open a new web browser tab and paste the IP address into the browser.
 
 **Press Enter to go the web page.**
- 
 An application should appear:
 
  Congratulations! You should be able to see this page. Currently, you do not have a database. Once you create your RDS instance, you connect it to your web server.
@@ -236,7 +234,6 @@ An application should appear:
 
 To deploy your RDS database, your VPC must have at least two subnets. These subnets must be in two different Availability Zones in the AWS Region where you want to deploy your DB instance. In this task, you create two private subnets for your Amazon RDS instance.
 
-### CREATE YOUR FIRST PRIVATE SUBNET
 
 * Step 1. In the AWS Management Console search field, type 
 VPC
@@ -289,8 +286,7 @@ Amazon RDS instances require a database subnet group. In this task, you create a
  
  Each DB subnet group should have subnets in at least two Availability Zones in a given region. When creating a DB instance in a VPC, you must select a DB subnet group.
 
-In the AWS Management Console search field, type 
-RDS.
+In the AWS Management Console search field, type RDS:
 
 Select RDS from the drop down menu.
 
