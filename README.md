@@ -1,6 +1,7 @@
 
 # Architecture Design
 
+## Part 1 with Architecture Design
 ![Amazon Virtual Private Cloud](/image/VPC%20Architecture%20Design.png)
 
 https://github.com/Gerald-Star/Deploy-Amazon-Virtual-Private-Cloud/assets/62772506/f6533f82-1448-4bc9-ac5b-f6159f809265
@@ -14,7 +15,8 @@ https://github.com/Gerald-Star/Deploy-Amazon-Virtual-Private-Cloud/assets/627725
 * To host multi-tier web applications.
 * To use and create hybrid connections.
 
-## Confi
+## Part 2. Configuration of Amazon Virtual Private Cloud on Amazon Management Console
+https://github.com/Gerald-Star/Deploy-Amazon-Virtual-Private-Cloud/assets/62772506/f0cb5b8d-b1ca-480b-9bc5-e48ecfb9cd2e
 
 
 
