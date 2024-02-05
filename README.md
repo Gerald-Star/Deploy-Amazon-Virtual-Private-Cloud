@@ -3,6 +3,8 @@
 
 ![Amazon Virtual Private Cloud](/image/VPC%20Architecture%20Design.png)
 
+https://youtu.be/CBsAiaks_-Y?si=amCz-rD8AIvBbycH
+
 [Amazon Virtual Private Cloud](https://explore.skillbuilder.aws/learn/course/499/play/41264/configuring-and-deploying-amazon-vpc-with-multiple-subnets) Cloud (Amazon VPC) allows you to provision a logically isolated section of the AWS cloud. This section enables you to launch AWS resources in a virtual network that you define. With Amazon VPC, you have full control over your virtual networking environment. You can select your IP address range, create subnets, and configure route tables and network gateways. 
 
 ## Use Cases
